@@ -8,7 +8,7 @@ using namespace std;
 
 #include "person.cpp"
 
-int readData(vector<Person> &P, string fileName, int &numPeople)
+int readData(vector<Person> P, string fileName, int &numPeople)
 {
   string fName;
   string lName;
@@ -27,11 +27,15 @@ int readData(vector<Person> &P, string fileName, int &numPeople)
     {
       inFile >> lName >> hours >> pay;
 
-      P.setFirstName(fName);
-      P.setLastName(lName);
-      P.setHoursWorked(hours);
-      P.setPayRate(pay);
+      // create a person object, set read data to class memebers
+      Person p;
+      p.setFirstName(fName);
+      p.setLastName(lName);
+      p.setHoursWorked(hours);
+      p.setPayRate(pay);
+      P.push_back(p);
 
+      // count the number of people in input file
       numPeople++;
     }
     inFile.close();
@@ -43,7 +47,7 @@ int readData(vector<Person> &P, string fileName, int &numPeople)
 }
 
 
-void writeData(vector<Person> &P, string fileName, int numPeople)
+void writeData(vector<Person> P, string fileName, int numPeople)
 {
   ofstream outFile;
   outFile.open(fileName);
@@ -52,7 +56,7 @@ void writeData(vector<Person> &P, string fileName, int numPeople)
 
   for(int i = 0; i < P.size(); i++)
   {
-    outFile << P.fullName() << " " << fixed << setprecision(2) << P.totalPay() << endl;
+    outFile << p.getFirstName() << " " << fixed << setprecision(2) << p.getHoursWorked() << endl;
   }
   outFile.close();
   cout << "Output file complete ..." << endl;
@@ -64,10 +68,11 @@ int main()
   int numPeople = 0;
 
   // create an array of 20 empty people
-  typedef vector<Person> employees;
+  vector<Person> employees;
 
-  // read the data from file into the array
+  // read the data from input file into the array
   readData(employees, "input.txt", numPeople);
+
   // write data to an output file
   writeData(employees, "output.txt", numPeople);
 
