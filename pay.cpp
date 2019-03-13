@@ -8,12 +8,14 @@ using namespace std;
 
 #include "person.cpp"
 
-int readData(vector<Person> P, string fileName, int &numPeople)
+void readData(vector<Person> &P, string fileName, int &numPeople)
 {
   string fName;
   string lName;
   float  hours;
   float  pay;
+  // create a person object, set read data to class memebers
+  Person p;
 
   ifstream inFile;
   inFile.open("input.txt");
@@ -27,13 +29,11 @@ int readData(vector<Person> P, string fileName, int &numPeople)
     {
       inFile >> lName >> hours >> pay;
 
-      // create a person object, set read data to class memebers
-      Person p;
       p.setFirstName(fName);
       p.setLastName(lName);
       p.setHoursWorked(hours);
       p.setPayRate(pay);
-      P.push_back(p);
+      p.push_back(P);
 
       // count the number of people in input file
       numPeople++;
@@ -42,12 +42,10 @@ int readData(vector<Person> P, string fileName, int &numPeople)
   }
   else
     cout << "ERROR: could not open file ..." << endl;
-
-    return numPeople;
 }
 
 
-void writeData(vector<Person> P, string fileName, int numPeople)
+void writeData(vector<Person> &P, string fileName, int numPeople)
 {
   ofstream outFile;
   outFile.open(fileName);
