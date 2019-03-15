@@ -1,3 +1,6 @@
+// Adam Gemperline
+// CPSC 301-03
+
 #include "person.h"
 
 Person::Person()

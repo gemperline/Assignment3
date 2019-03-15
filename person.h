@@ -1,3 +1,6 @@
+// Adam Gemperline
+// CPSC 301-03
+
 #ifndef PERSON_H
 #define PERSON_H
 
